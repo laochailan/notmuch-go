@@ -251,7 +251,7 @@ func (self *Database) AddMessage(fname string) (*Message, Status) {
 	}
 
 	var c_msg *C.notmuch_message_t = new(C.notmuch_message_t)
-	st := Status(C.notmuch_database_add_message(self.db, c_fname, &c_msg))
+	st := Status(C.notmuch_database_index_file(self.db, c_fname, nil, &c_msg))
 
 	return &Message{message: c_msg}, st
 }
